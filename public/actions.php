@@ -14,6 +14,9 @@ session_start();
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    header('Allow: POST');
+    setFlash('error', 'Method not allowed.');
     header('Location: index.php');
     exit;
 }

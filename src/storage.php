@@ -53,8 +53,8 @@ function saveTasks($tasks) {
 function addTask($task) {
     $tasks = loadTasks();
     
-    // Generate unique ID
-    $task['id'] = uniqid('task_', true);
+    // Generate unique ID using secure random bytes
+    $task['id'] = 'task_' . bin2hex(random_bytes(16));
     $task['created_at'] = date('Y-m-d H:i:s');
     
     $tasks[] = $task;
