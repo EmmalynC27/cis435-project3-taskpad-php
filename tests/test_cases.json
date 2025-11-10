@@ -1,1 +1,215 @@
-
+[
+    {
+        "id": "TC01",
+        "desc": "Create task happy path",
+        "method": "POST",
+        "endpoint": "public/create.php",
+        "post": {
+            "title": "Buy groceries",
+            "description": "Milk, bread, and eggs",
+            "priority": "Medium",
+            "due": "2025-12-01"
+        },
+        "expect": {
+            "status": 302,
+            "redirect_contains": "index.php"
+        }
+    },
+    {
+        "id": "TC02",
+        "desc": "Create task missing title",
+        "method": "POST",
+        "endpoint": "public/create.php",
+        "post": {
+            "title": "",
+            "description": "Some description",
+            "priority": "High",
+            "due": ""
+        },
+        "expect": {
+            "status": 200,
+            "html_contains": ["Title is required"]
+        }
+    },
+    {
+        "id": "TC03",
+        "desc": "Create task invalid date format",
+        "method": "POST",
+        "endpoint": "public/create.php",
+        "post": {
+            "title": "Test task",
+            "description": "",
+            "priority": "Low",
+            "due": "invalid-date"
+        },
+        "expect": {
+            "status": 200,
+            "html_contains": ["Due date must be in YYYY-MM-DD format"]
+        }
+    },
+    {
+        "id": "TC04",
+        "desc": "Create task invalid priority",
+        "method": "POST",
+        "endpoint": "public/create.php",
+        "post": {
+            "title": "Test task",
+            "description": "",
+            "priority": "Invalid",
+            "due": ""
+        },
+        "expect": {
+            "status": 200,
+            "html_contains": ["Priority must be Low, Medium, or High"]
+        }
+    },
+    {
+        "id": "TC05",
+        "desc": "Create task past due date",
+        "method": "POST",
+        "endpoint": "public/create.php",
+        "post": {
+            "title": "Test task",
+            "description": "",
+            "priority": "Medium",
+            "due": "2020-01-01"
+        },
+        "expect": {
+            "status": 200,
+            "html_contains": ["Due date cannot be in the past"]
+        }
+    },
+    {
+        "id": "TC06",
+        "desc": "List tasks no filters",
+        "method": "GET",
+        "endpoint": "public/index.php",
+        "get": {},
+        "expect": {
+            "status": 200,
+            "html_contains": ["TaskPad PHP", "Total"]
+        }
+    },
+    {
+        "id": "TC07",
+        "desc": "Filter tasks text search",
+        "method": "GET",
+        "endpoint": "public/index.php",
+        "get": {
+            "q": "Welcome"
+        },
+        "expect": {
+            "status": 200,
+            "html_contains": ["Welcome to TaskPad"]
+        }
+    },
+    {
+        "id": "TC08",
+        "desc": "Filter tasks priority filter",
+        "method": "GET",
+        "endpoint": "public/index.php",
+        "get": {
+            "priority": "High"
+        },
+        "expect": {
+            "status": 200,
+            "html_contains": ["priority-high"]
+        }
+    },
+    {
+        "id": "TC09",
+        "desc": "Filter tasks no matches",
+        "method": "GET",
+        "endpoint": "public/index.php",
+        "get": {
+            "q": "nonexistent"
+        },
+        "expect": {
+            "status": 200,
+            "html_contains": ["No matching tasks found"]
+        }
+    },
+    {
+        "id": "TC10",
+        "desc": "Complete task valid ID",
+        "method": "POST",
+        "endpoint": "public/actions.php",
+        "post": {
+            "action": "complete",
+            "task_id": "task_1"
+        },
+        "expect": {
+            "status": 302,
+            "redirect_contains": "index.php"
+        }
+    },
+    {
+        "id": "TC11",
+        "desc": "Complete task invalid ID",
+        "method": "POST",
+        "endpoint": "public/actions.php",
+        "post": {
+            "action": "complete",
+            "task_id": "nonexistent"
+        },
+        "expect": {
+            "status": 302,
+            "redirect_contains": "index.php"
+        }
+    },
+    {
+        "id": "TC12",
+        "desc": "Delete task valid ID",
+        "method": "POST",
+        "endpoint": "public/actions.php",
+        "post": {
+            "action": "delete",
+            "task_id": "task_2"
+        },
+        "expect": {
+            "status": 302,
+            "redirect_contains": "index.php"
+        }
+    },
+    {
+        "id": "TC13",
+        "desc": "CSRF protection invalid token",
+        "method": "POST",
+        "endpoint": "public/actions.php",
+        "post": {
+            "action": "delete",
+            "task_id": "task_1",
+            "csrf_token": "invalid"
+        },
+        "expect": {
+            "status": 302,
+            "redirect_contains": "index.php"
+        }
+    },
+    {
+        "id": "TC14",
+        "desc": "Actions invalid method",
+        "method": "GET",
+        "endpoint": "public/actions.php",
+        "get": {},
+        "expect": {
+            "status": 302,
+            "redirect_contains": "index.php"
+        }
+    },
+    {
+        "id": "TC15",
+        "desc": "Filter combined filters",
+        "method": "GET",
+        "endpoint": "public/index.php",
+        "get": {
+            "q": "Learn",
+            "priority": "High",
+            "completed": "false"
+        },
+        "expect": {
+            "status": 200,
+            "html_contains": ["Learn PHP Basics"]
+        }
+    }
+]
