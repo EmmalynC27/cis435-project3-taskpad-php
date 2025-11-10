@@ -30,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $taskId = $storage->addTask($sanitized);
         
         if ($taskId) {
-            FlashMessages::success('Task created successfully!');
+            FlashMessages::success('This task was created successfully!');
             header('Location: index.php');
             exit;
         } else {
-            FlashMessages::error('Failed to create task. Please try again.');
+            FlashMessages::error('Error: Failed to create task. Please try again.');
         }
     } else {
         // Preserve form data for re-display
@@ -66,13 +66,13 @@ $csrfToken = CSRFProtection::generateToken();
             <?php echo FlashMessages::display(); ?>
 
             <div class="form-container">
-                <h2>Create New Task</h2>
-                
+                <h2>Welcome to Task Manager!</h2>
+                <p> Create and manage your current ongoing tasks easily and efficiently! </p>
                 <form method="POST" action="create.php" class="task-form">
                     <?php echo CSRFProtection::getTokenField(); ?>
                     
                     <div class="form-group">
-                        <label for="title">Title *</label>
+                        <label for="title">Task Master </label>
                         <input type="text" 
                                id="title" 
                                name="title" 

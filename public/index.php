@@ -99,13 +99,13 @@ $pendingTasks = $totalTasks - $completedTasks;
                 <?php if (empty($tasks)): ?>
                     <div class="empty-state">
                         <?php if (empty($storage->getAllTasks())): ?>
-                            <h3>No tasks yet!</h3>
-                            <p>Get started by creating your first task.</p>
-                            <a href="create.php" class="btn btn-primary">Create Task</a>
+                            <h3>No current tasks -- add one now!</h3>
+                            <p>Start by creating a new task! </p>
+                            <a href="create.php" class="btn btn-primary">Create a Task</a>
                         <?php else: ?>
-                            <h3>No matching tasks found</h3>
-                            <p>Try adjusting your filter criteria.</p>
-                            <a href="index.php" class="btn btn-secondary">Show All Tasks</a>
+                            <h3>No tasks detected -- check your criteria!</h3>
+                            <p>Verify your search criteria and filters. Please try again. </p>
+                            <a href="index.php" class="btn btn-secondary">Display All Tasks</a>
                         <?php endif; ?>
                     </div>
                 <?php else: ?>
@@ -149,7 +149,7 @@ $pendingTasks = $totalTasks - $completedTasks;
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="task_id" value="<?php echo htmlspecialchars($task['id'], ENT_QUOTES, 'UTF-8'); ?>">
                                         <button type="submit" class="btn btn-danger btn-sm" 
-                                                onclick="return confirm('Are you sure you want to delete this task?')">
+                                                onclick="return confirm('Do you want to delete this task?')">
                                             🗑️ Delete
                                         </button>
                                     </form>
