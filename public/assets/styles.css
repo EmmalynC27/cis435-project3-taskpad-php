@@ -1,3 +1,5 @@
+@import url(https://db.onlinewebfonts.com/c/8fda3921d7767e1e6cf53d3e713a62ed?family=Absolute+Joyful);
+
 /* Basic Reset and Layout */
 * {
     margin: 0;
@@ -5,17 +7,46 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #2c3e50;
+    --accent-color: #6c757d;
+    --background-color: #ffffff;
+}
+
 body {
-    font-family: system-ui, sans-serif;
+    font-family: system-ui, sans-serif, "Absolute Joyful";
     line-height: 1.6;
+    height: auto;
     color: #333;
     background: #f5f5f5;
-    padding: 20px;
+    background-color: #f5f5f5; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to top, rgb(200, 175, 220), rgb(60, 60, 255));
+    padding: 10px;
+
 }
 
 .container {
+    display: grid;
+    align-content: center;
     max-width: 1000px;
     margin: 0 auto;
+}
+
+.container header {
+    border: 6px solid;
+    border-radius: 4px;
+    border-color: rgb(150, 150, 255);
+}
+
+.container header h1{
+    text-align: center;
+    font-size: 4.5rem;
+    font-family: "Absolute Joyful";
+}
+
+.container header nav{
+    justify-content: center;
 }
 
 /* Header */
@@ -28,7 +59,7 @@ header {
 }
 
 header h1 {
-    color: #2c3e50;
+    color: var(--secondary-color);
     margin-bottom: 10px;
 }
 
@@ -48,7 +79,7 @@ nav {
     display: inline-block;
 }
 
-.btn-primary { background: #007bff; color: white; }
+.btn-primary { background: var(--primary-color); color: white; }
 .btn-secondary { background: #6c757d; color: white; }
 .btn-success { background: #28a745; color: white; }
 .btn-danger { background: #dc3545; color: white; }
@@ -93,18 +124,21 @@ nav {
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 6px solid;
+    border-color: rgb(150, 150, 255);
 }
 
-.stat-number {
+.stats .stat-item .stat-number {
     display: block;
-    font-size: 24px;
+    font-size: 2rem;
     font-weight: bold;
-    color: #007bff;
+    text-shadow: 1.5px 0.5px black;
+    color: var(--primary-color);
 }
 
-.stat-label {
+.stats .stat-item .stat-label {
     color: #666;
-    font-size: 14px;
+    font-size: 1.25rem;
 }
 
 /* Forms */
@@ -114,6 +148,8 @@ nav {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 20px;
+    border: 6px solid;
+    border-color: rgb(150, 150, 255);
 }
 
 .form-container {
@@ -151,7 +187,7 @@ nav {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: var(--primary-color);
 }
 
 .form-group input.error,
@@ -184,6 +220,8 @@ nav {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 4px solid;
+    border-color: rgb(220, 175, 255);
 }
 
 .task-card.completed {
@@ -199,7 +237,7 @@ nav {
 }
 
 .task-title {
-    color: #2c3e50;
+    color: var(--secondary-color);
     font-size: 18px;
     font-weight: 600;
     margin: 0;
@@ -248,17 +286,17 @@ nav {
 /* Mobile */
 @media (max-width: 600px) {
     body { padding: 10px; }
-    
+
     nav { flex-direction: column; }
-    
+
     .form-row { grid-template-columns: 1fr; }
-    
+
     .tasks-grid { grid-template-columns: 1fr; }
-    
+
     .task-header { flex-direction: column; align-items: flex-start; }
-    
+
     .form-actions { flex-direction: column; }
-    
+
     .stats { grid-template-columns: repeat(3, 1fr); }
 }
 
@@ -271,7 +309,7 @@ header {
 }
 
 header h1 {
-    color: #2c3e50;
+    color: var(--secondary-color);
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
@@ -297,7 +335,7 @@ nav {
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
 }
 
@@ -404,7 +442,7 @@ nav {
     display: block;
     font-size: 2rem;
     font-weight: bold;
-    color: #007bff;
+    color: var(--primary-color);
 }
 
 .stat-label {
@@ -459,6 +497,7 @@ nav {
 .form-group select,
 .form-group textarea {
     width: 100%;
+    max-width: 100%; /*Limits description text area to be confined within container*/
     padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -470,7 +509,7 @@ nav {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
 }
 
@@ -531,7 +570,7 @@ nav {
 }
 
 .task-title {
-    color: #2c3e50;
+    color: var(--secondary-color);
     font-size: 1.1rem;
     font-weight: 600;
     margin: 0;
@@ -609,10 +648,10 @@ nav {
 
 /* Mobile */
 @media (max-width: 600px) {
-    nav, .form-row, .tasks-grid, .task-header, .form-actions { 
-        flex-direction: column; 
-        grid-template-columns: 1fr; 
+    nav, .form-row, .tasks-grid, .task-header, .form-actions {
+        flex-direction: column;
+        grid-template-columns: 1fr;
     }
-    
+
     .stats { grid-template-columns: repeat(3, 1fr); }
 }

@@ -21,14 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: create.php');
         exit;
     }
-    
+
     // Validate form data
     [$isValid, $errors, $sanitized] = TaskValidator::validateCreate($_POST);
-    
+
     if ($isValid) {
         // Save task
         $taskId = $storage->addTask($sanitized);
-        
+
         if ($taskId) {
             FlashMessages::success('This task was created successfully!');
             header('Location: index.php');
@@ -70,12 +70,12 @@ $csrfToken = CSRFProtection::generateToken();
                 <p> Create and manage your current ongoing tasks easily and efficiently! </p>
                 <form method="POST" action="create.php" class="task-form">
                     <?php echo CSRFProtection::getTokenField(); ?>
-                    
+
                     <div class="form-group">
                         <label for="title">Task Master </label>
-                        <input type="text" 
-                               id="title" 
-                               name="title" 
+                        <input type="text"
+                               id="title"
+                               name="title"
                                value="<?php echo htmlspecialchars($formData['title'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                                class="<?php echo isset($errors['title']) ? 'error' : ''; ?>"
                                placeholder="Enter task title"
@@ -87,8 +87,8 @@ $csrfToken = CSRFProtection::generateToken();
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea id="description" 
-                                  name="description" 
+                        <textarea id="description"
+                                  name="description"
                                   class="<?php echo isset($errors['description']) ? 'error' : ''; ?>"
                                   placeholder="Enter task description (optional)"
                                   rows="4"><?php echo htmlspecialchars($formData['description'] ?? '', ENT_QUOTES, 'UTF-8'); ?></textarea>
@@ -100,8 +100,8 @@ $csrfToken = CSRFProtection::generateToken();
                     <div class="form-row">
                         <div class="form-group">
                             <label for="priority">Priority *</label>
-                            <select id="priority" 
-                                    name="priority" 
+                            <select id="priority"
+                                    name="priority"
                                     class="<?php echo isset($errors['priority']) ? 'error' : ''; ?>"
                                     required>
                                 <option value="">Select priority</option>
@@ -116,9 +116,9 @@ $csrfToken = CSRFProtection::generateToken();
 
                         <div class="form-group">
                             <label for="due">Due Date</label>
-                            <input type="date" 
-                                   id="due" 
-                                   name="due" 
+                            <input type="date"
+                                   id="due"
+                                   name="due"
                                    value="<?php echo htmlspecialchars($formData['due'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                                    class="<?php echo isset($errors['due']) ? 'error' : ''; ?>"
                                    min="<?php echo date('Y-m-d'); ?>">
