@@ -23,13 +23,13 @@ body {
     background-color: #f5f5f5; /* For browsers that do not support gradients */
     background-image: linear-gradient(to top, rgb(200, 175, 220), rgb(60, 60, 255));
     padding: 10px;
-
 }
 
 .container {
     display: grid;
     align-content: center;
     max-width: 1000px;
+    min-width: 0;
     margin: 0 auto;
 }
 
@@ -52,7 +52,7 @@ body {
 /* Header */
 header {
     background: white;
-    padding: 20px;
+    padding: 5%;
     border-radius: 8px;
     margin-bottom: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -281,23 +281,6 @@ nav {
     text-align: center;
     padding: 40px 20px;
     color: #999;
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-    body { padding: 10px; }
-
-    nav { flex-direction: column; }
-
-    .form-row { grid-template-columns: 1fr; }
-
-    .tasks-grid { grid-template-columns: 1fr; }
-
-    .task-header { flex-direction: column; align-items: flex-start; }
-
-    .form-actions { flex-direction: column; }
-
-    .stats { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* Header */
@@ -648,10 +631,21 @@ nav {
 
 /* Mobile */
 @media (max-width: 600px) {
-    nav, .form-row, .tasks-grid, .task-header, .form-actions {
-        flex-direction: column;
-        grid-template-columns: 1fr;
-    }
+    body { max-width: 100%;  }
+
+    nav { flex-direction: column; }
+
+    .container header h1 { font-size: 3.5rem; }
+
+    .container header nav { padding: 0px 125px; }
+
+    .form-row { grid-template-columns: 1fr; }
+
+    .tasks-grid { grid-template-columns: 1fr; }
+
+    .task-header { flex-direction: column; align-items: flex-start; }
+
+    .form-actions { flex-direction: column; }
 
     .stats { grid-template-columns: repeat(3, 1fr); }
 }
