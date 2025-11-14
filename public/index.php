@@ -118,11 +118,11 @@ $pendingTasks = $totalTasks - $completedTasks;
                                         <?php echo $task['priority']; ?>
                                     </span>
                                 </div>
-                                
+
                                 <?php if (!empty($task['description'])): ?>
                                     <p class="task-description"><?php echo TaskValidator::sanitizeOutput($task['description']); ?></p>
                                 <?php endif; ?>
-                                
+
                                 <div class="task-meta">
                                     <?php if ($task['due']): ?>
                                         <span class="due-date">
@@ -133,7 +133,7 @@ $pendingTasks = $totalTasks - $completedTasks;
                                         Created: <?php echo date('M j, Y', strtotime($task['created_at'])); ?>
                                     </span>
                                 </div>
-                                
+
                                 <div class="task-actions">
                                     <?php if (!$task['completed']): ?>
                                         <form method="POST" action="actions.php" style="display: inline;">
@@ -143,7 +143,7 @@ $pendingTasks = $totalTasks - $completedTasks;
                                             <button type="submit" class="btn btn-success btn-sm">✓ Complete</button>
                                         </form>
                                     <?php endif; ?>
-                                    
+
                                     <form method="POST" action="actions.php" style="display: inline;">
                                         <?php echo CSRFProtection::getTokenField(); ?>
                                         <input type="hidden" name="action" value="delete">

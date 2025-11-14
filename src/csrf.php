@@ -1,7 +1,6 @@
 <?php
 
 class CSRFProtection {
-    
     /**
      * Generate a CSRF token and store it in session
      * @return string
@@ -10,13 +9,13 @@ class CSRFProtection {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        
+
         $token = bin2hex(random_bytes(32));
         $_SESSION['csrf_token'] = $token;
-        
+
         return $token;
     }
-    
+
     /**
      * Verify CSRF token
      * @param string $token
@@ -26,14 +25,14 @@ class CSRFProtection {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        
+
         if (!isset($_SESSION['csrf_token'])) {
             return false;
         }
-        
+
         return hash_equals($_SESSION['csrf_token'], $token);
     }
-    
+
     /**
      * Get the current CSRF token
      * @return string|null
@@ -42,10 +41,10 @@ class CSRFProtection {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        
+
         return $_SESSION['csrf_token'] ?? null;
     }
-    
+
     /**
      * Generate HTML input field for CSRF token
      * @return string
@@ -54,7 +53,7 @@ class CSRFProtection {
         $token = self::getToken() ?: self::generateToken();
         return '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($token, ENT_QUOTES, 'UTF-8') . '">';
     }
-    
+
     /**
      * Validate CSRF token from POST data
      * @param array $postData

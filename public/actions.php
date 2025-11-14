@@ -57,7 +57,7 @@ switch ($action) {
             }
         }
         break;
-        
+
     case 'delete':
         if ($storage->deleteTask($taskId)) {
             FlashMessages::success('Task deleted successfully!');
@@ -65,7 +65,7 @@ switch ($action) {
             FlashMessages::error('Failed to delete task. Please try again.');
         }
         break;
-        
+
     default:
         FlashMessages::error('Invalid action.');
         break;
