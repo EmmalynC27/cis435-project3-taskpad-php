@@ -1,7 +1,6 @@
 <?php
 
 class TaskValidator {
-    
     /**
      * Validate task creation data
      * @param array $data
@@ -10,7 +9,7 @@ class TaskValidator {
     public static function validateCreate($data) {
         $errors = [];
         $sanitized = [];
-        
+
         // Title validation (required)
         if (empty($data['title']) || empty(trim($data['title']))) {
             $errors['title'] = 'Title is required';
@@ -22,14 +21,14 @@ class TaskValidator {
             }
             $sanitized['title'] = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
         }
-        
+
         // Description validation (optional)
         $description = isset($data['description']) ? trim($data['description']) : '';
         if (strlen($description) > 1000) {
             $errors['description'] = 'Description must be 1000 characters or less';
         }
         $sanitized['description'] = htmlspecialchars($description, ENT_QUOTES, 'UTF-8');
-        
+
         // Priority validation (required, must be from allowed values)
         $allowedPriorities = ['Low', 'Medium', 'High'];
         if (empty($data['priority']) || !in_array($data['priority'], $allowedPriorities)) {
@@ -38,7 +37,7 @@ class TaskValidator {
         } else {
             $sanitized['priority'] = $data['priority'];
         }
-        
+
         // Due date validation (optional, must be valid date format)
         $due = isset($data['due']) ? trim($data['due']) : '';
         if (!empty($due)) {
@@ -55,12 +54,12 @@ class TaskValidator {
             }
         }
         $sanitized['due'] = $due ?: null;
-        
+
         $isValid = empty($errors);
-        
+
         return [$isValid, $errors, $sanitized];
     }
-    
+
     /**
      * Validate filter parameters
      * @param array $data
@@ -69,14 +68,14 @@ class TaskValidator {
     public static function validateFilters($data) {
         $errors = [];
         $sanitized = [];
-        
+
         // Search query (optional)
         $query = isset($data['q']) ? trim($data['q']) : '';
         if (strlen($query) > 100) {
             $errors['q'] = 'Search query must be 100 characters or less';
         }
         $sanitized['q'] = htmlspecialchars($query, ENT_QUOTES, 'UTF-8');
-        
+
         // Priority filter (optional)
         $allowedPriorities = ['Low', 'Medium', 'High'];
         $priority = isset($data['priority']) ? trim($data['priority']) : '';
@@ -85,7 +84,7 @@ class TaskValidator {
             $priority = '';
         }
         $sanitized['priority'] = $priority;
-        
+
         // Status filter (optional)
         $completed = isset($data['completed']) ? trim($data['completed']) : '';
         if (!empty($completed) && !in_array($completed, ['true', 'false'])) {
@@ -93,12 +92,12 @@ class TaskValidator {
             $completed = '';
         }
         $sanitized['completed'] = $completed;
-        
+
         $isValid = empty($errors);
-        
+
         return [$isValid, $errors, $sanitized];
     }
-    
+
     /**
      * Sanitize string for safe output
      * @param string $str
@@ -107,7 +106,7 @@ class TaskValidator {
     public static function sanitizeOutput($str) {
         return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
     }
-    
+
     /**
      * Validate task ID
      * @param string $id
