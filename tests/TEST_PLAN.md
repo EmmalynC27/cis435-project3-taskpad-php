@@ -1,7 +1,7 @@
 # TaskPad PHP - Test Plan
 
 ## Overview
-This document outlines the black-box test cases for the TaskPad PHP application. The tests cover all major functionality including task creation, validation, filtering, completion, and deletion.
+This document outlines the black-box test cases for the TaskPad PHP application covering all major functionality including task creation, validation, filtering, completion, and deletion.
 
 ## Test Environment
 - **Application**: TaskPad PHP
@@ -229,20 +229,11 @@ For comprehensive testing, the following test data should be available:
 5. **Tasks with different due dates**: Past, present, future
 6. **Tasks with searchable content**: Various keywords in titles/descriptions
 
-## Test Execution Notes
+## Test Execution Notes and Success Criteria 
 
-- All tests should be run with a clean session (new CSRF tokens)
-- JSON file state should be backed up before running destructive tests
-- Tests should be run in isolation to avoid dependencies
-- Date-dependent tests should use relative dates from current date
-- All user inputs should be properly HTML-escaped in output
-- HTTP status codes should be verified for proper REST behavior
+All tests should be run with a clean session (new CSRF tokens) and they should also be run in isolation to avoid dependencies. Relative dates from the current date should be used for any tests dependent on dates. All user input should be displayed properly in output. In addition, HTTP 
+status codes should be verified for proper rest behavior. 
 
-## Success Criteria
-
-- All test cases pass with expected results
-- No PHP errors or warnings generated
-- JSON data integrity maintained
-- Proper HTTP status codes returned
-- Security measures (CSRF, input validation) working correctly
-- User experience flows work as designed (PRG pattern, flash messages)
+In order for tests to be considered successful, all test cases should pass
+with expected results with no PHP errors or warnings generated. JSON data
+integrity needs to be maintained as well as proper HTTP status codes returned. Security features should work correctly as well as expected experience for the user. 
