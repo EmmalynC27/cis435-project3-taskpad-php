@@ -22,26 +22,18 @@ This test ensures the JSON file storage works to be expected by demonstrating
 the acceptable file system permission and data survival throughout the tasks. 
 
 ### Task Management
-- ✅ Create new tasks with all required fields
-- ✅ Validate input data server-side
-- ✅ Store tasks in JSON format
-- ✅ Retrieve individual tasks by ID
-- ✅ Mark tasks as completed
-- ✅ Delete tasks from storage
+This test creates new tasks, validates input information, and stores the tasks
+in the JSON file. Individual tasks can be retrieved using ID and users can mark 
+tasks as completed and they can also delete tasks as well. 
 
 ### Data Integrity
-- ✅ Unique ID generation for new tasks
-- ✅ Timestamp tracking (created_at, updated_at)
-- ✅ Data type validation (dates, priorities)
-- ✅ Required field enforcement
+This test validates unique ID generation for all new tasks created. There is 
+time stamp tracking with each task (created_at, updated_at) as well as required field
+enforcement as well as data type validation. 
 
 ### Security Features
-- ✅ Input sanitization implemented
-- ✅ XSS prevention through proper escaping
-- ✅ CSRF protection classes available
-- ✅ Method validation implemented
-
-## Manual Testing Recommendations
+This test is for security features in the project. Input sanitization and method validation
+were implemented as well as XSS prevention and CSRF protection classes;
 
 Since automated testing has header output limitations, the following should be tested manually in a browser:
 
